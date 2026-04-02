@@ -16,6 +16,85 @@ body {
   background-color: #f0f0f0;
 }
 
+body.home-page {
+  --home-copy-fade: 0;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+}
+
+body.home-page .page-header,
+body.home-page .main-container {
+  scroll-snap-stop: always;
+}
+
+body.home-page .page-header {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(5rem, 12vh, 8rem) 1rem;
+  scroll-snap-align: start;
+  isolation: isolate;
+}
+
+body.home-page .page-header>* {
+  position: relative;
+  z-index: 1;
+}
+
+body.home-page .page-title {
+  opacity: calc(1 - var(--home-copy-fade));
+  transform: translateY(calc(var(--home-copy-fade) * -2rem));
+  filter: blur(calc(var(--home-copy-fade) * 8px));
+  transition: opacity 0.18s linear, transform 0.28s ease-out, filter 0.28s ease-out;
+  animation: homeTitleIntroFade 1.35s ease-out 0.15s 1;
+  will-change: opacity, transform, filter;
+}
+
+body.home-page .author-info.secondary {
+  opacity: calc(1 - (var(--home-copy-fade) * 0.8));
+  transform: translateY(calc(var(--home-copy-fade) * -1rem));
+  transition: opacity 0.18s linear, transform 0.28s ease-out;
+  will-change: opacity, transform;
+}
+
+body.home-page .main-container {
+  min-height: 100svh;
+  width: min(1400px, calc(100% - 2rem));
+  padding: clamp(1.5rem, 4vh, 3rem) 0;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: flex-start;
+  scroll-snap-align: start;
+}
+
+body.home-page .sidebar {
+  top: clamp(1rem, 8vh, 5rem);
+}
+
+body.home-page .content-area {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  align-content: center;
+  padding-top: 4rem;
+}
+
+body.home-page .home-main-controls {
+  top: 1rem;
+  left: 1rem;
+  z-index: 12;
+}
+
+body.home-page .image-slider {
+  height: clamp(280px, 44svh, 460px);
+  margin-bottom: 0;
+}
+
+body.home-page .home-intro {
+  margin-bottom: 0;
+}
+
 /* 几何图案装饰 */
 .geometric-decoration {
   position: relative;
@@ -29,7 +108,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: 
+  background:
     radial-gradient(circle at 25% 25%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 75% 75%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
     linear-gradient(45deg, transparent 48%, rgba(52, 152, 219, 0.1) 49%, rgba(52, 152, 219, 0.1) 51%, transparent 52%),
@@ -40,13 +119,42 @@ body {
 }
 
 @keyframes geometricMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+@keyframes homeTitleIntroFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  45% {
+    opacity: 0.12;
+    transform: translateY(-0.85rem);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 /* ===== 布局样式 ===== */
 .page-header {
   background-color: #e8eaf6;
+  background-image: url('../picture/headPic.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
   padding: 3rem 1rem;
   border-bottom: 1px solid #c5cae9;
@@ -57,17 +165,8 @@ body {
 .page-header::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(156, 39, 176, 0.1) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 48%, rgba(52, 152, 219, 0.1) 49%, rgba(52, 152, 219, 0.1) 51%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(156, 39, 176, 0.1) 49%, rgba(156, 39, 176, 0.1) 51%, transparent 52%);
-  background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
-  animation: geometricMove 20s linear infinite;
+  inset: 0;
+  background: none;
   z-index: 0;
 }
 
@@ -114,7 +213,7 @@ body {
 .nav-container {
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
 }
 
@@ -167,7 +266,7 @@ body {
   overflow: hidden;
   border-radius: 12px;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   height: 400px;
   width: 100%;
 }
@@ -220,7 +319,7 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .slider-btn:hover {
@@ -234,7 +333,7 @@ body {
   border-radius: 8px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
@@ -305,7 +404,7 @@ body.dark-mode h5 {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid #e3e7f1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
@@ -314,7 +413,7 @@ body.dark-mode h5 {
 .event-item:hover,
 .term-item:hover,
 .content-section:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
@@ -350,7 +449,7 @@ body.dark-mode h5 {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid #e3e7f1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* ===== 子导航样式 ===== */
@@ -389,11 +488,11 @@ body.dark-mode h5 {
   z-index: 10;
 }
 
-.sub-nav li:hover ~ li {
+.sub-nav li:hover~li {
   transform: translateX(5px);
 }
 
-.sub-nav li:hover + li {
+.sub-nav li:hover+li {
   transform: translateX(10px);
 }
 
@@ -419,7 +518,7 @@ body.dark-mode h5 {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 999;
 }
 
@@ -432,7 +531,7 @@ body.dark-mode h5 {
   background-color: #303f9f;
   color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== 响应式设计 ===== */
@@ -441,7 +540,7 @@ body.dark-mode h5 {
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .sidebar {
     width: 100%;
     position: relative;
@@ -449,45 +548,69 @@ body.dark-mode h5 {
     margin-right: 0;
     margin-bottom: 2rem;
   }
-  
+
   .nav-list {
     display: flex;
     overflow-x: auto;
     padding-bottom: 0.5rem;
   }
-  
+
   .nav-item {
     margin-right: 0.5rem;
     margin-bottom: 0;
     flex-shrink: 0;
   }
-  
+
   .nav-link {
     white-space: nowrap;
   }
-  
+
   .image-slider {
     height: 300px;
   }
+
+  body.home-page {
+    scroll-snap-type: y proximity;
+  }
+
+  body.home-page .page-header {
+    min-height: 90svh;
+  }
+
+  body.home-page .main-container {
+    width: auto;
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  body.home-page .content-area {
+    align-content: start;
+  }
+
+  body.home-page .home-main-controls {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
 }
 
 @media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
   }
-  
+
   .section {
     padding: 1.5rem;
   }
-  
+
   .country-article {
     padding: 1.25rem;
   }
-  
+
   .image-slider {
     height: 250px;
   }
-  
+
   .back-to-top {
     bottom: 1rem;
     right: 1rem;
@@ -495,21 +618,25 @@ body.dark-mode h5 {
     height: 45px;
     font-size: 1.25rem;
   }
+
+  body.home-page .page-header {
+    min-height: 86svh;
+  }
 }
 
 @media (max-width: 480px) {
   .page-header {
     padding: 2rem 1rem;
   }
-  
+
   .page-title {
     font-size: 1.75rem;
   }
-  
+
   .section {
     padding: 1rem;
   }
-  
+
   .image-slider {
     height: 200px;
   }
@@ -529,6 +656,10 @@ body.dark-mode h5 {
 
 
 .mode-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
   cursor: pointer;
   font-size: 1.5rem;
   transition: transform 0.3s ease;
@@ -540,6 +671,10 @@ body.dark-mode h5 {
 }
 
 .music-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
   cursor: pointer;
   font-size: 1.5rem;
   transition: transform 0.3s ease;
@@ -553,6 +688,15 @@ body.dark-mode h5 {
 .mode-toggle:hover,
 .music-toggle:hover {
   transform: scale(1.1);
+}
+
+.mode-toggle:focus-visible,
+.music-toggle:focus-visible,
+.slider-btn:focus-visible,
+.back-to-top:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 3px;
 }
 
 .mode-icon {
@@ -581,11 +725,7 @@ body.dark-mode .page-header {
 }
 
 body.dark-mode .page-header::before {
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(100, 100, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(150, 100, 255, 0.1) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 48%, rgba(100, 100, 255, 0.1) 49%, rgba(100, 100, 255, 0.1) 51%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(150, 100, 255, 0.1) 49%, rgba(150, 100, 255, 0.1) 51%, transparent 52%);
+  background: none;
 }
 
 body.dark-mode .page-title {
@@ -600,9 +740,10 @@ body.dark-mode .author-info.secondary {
   color: #b0b0b0;
 }
 
+
 body.dark-mode .nav-container {
   background-color: #2a1d32;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .nav-title {
@@ -630,7 +771,7 @@ body.dark-mode .slider-item {
 
 body.dark-mode .section {
   background-color: #2a1d32;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .section-title {
@@ -663,7 +804,7 @@ body.dark-mode .content-section,
 body.dark-mode .other-content-box {
   background-color: #211c48;
   border: 1px solid #3a316a;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -673,7 +814,7 @@ body.dark-mode .event-item:hover,
 body.dark-mode .term-item:hover,
 body.dark-mode .content-section:hover,
 body.dark-mode .other-content-box:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
@@ -707,13 +848,13 @@ body.dark-mode .sub-nav li:hover a {
 body.dark-mode .back-to-top {
   background-color: #1e0f53;
   color: #f0f0f0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .back-to-top:hover {
   background-color: #2a1d32;
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode footer {
@@ -729,23 +870,23 @@ body.dark-mode footer {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid #e3e7f1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .org-box:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
 body.dark-mode .org-box {
   background-color: #211c48 !important;
   border: 1px solid #3a316a;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .org-box:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* 主页介绍部分样式 */
@@ -754,7 +895,7 @@ body.dark-mode .org-box:hover {
   border-radius: 8px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .home-intro .content-paragraph {
@@ -777,7 +918,7 @@ body.dark-mode .org-box:hover {
 
 body.dark-mode .home-intro {
   background-color: #2a1d32;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .home-intro .content-paragraph {
@@ -792,15 +933,17 @@ body.dark-mode .home-intro li {
 .page-footer {
   background-color: #e8eaf6;
   text-align: center;
-  padding: 2rem;
-  margin-top: 2rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem) 1.5rem;
+  margin-top: clamp(1.5rem, 3vh, 2.25rem);
   border-top: 1px solid #c5cae9;
   color: #666;
 }
 
 .page-footer p {
-  margin: 0.5rem 0;
+  margin: 0.35rem 0;
   color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
 
 body.dark-mode .page-footer {

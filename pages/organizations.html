@@ -12,12 +12,12 @@
   <!-- 页面头部 -->
   <header class="page-header">
     <div class="header-controls">
-      <div class="mode-toggle" id="modeToggle" title="开启夜间模式">
+      <button type="button" class="mode-toggle" id="modeToggle" title="开启夜间模式" aria-label="切换夜间模式" aria-pressed="false">
         <span class="mode-icon" id="modeIcon">🌙</span>
-      </div>
-      <div class="music-toggle" id="musicToggle" title="开启背景音乐">
+      </button>
+      <button type="button" class="music-toggle" id="musicToggle" title="开启背景音乐" aria-label="切换背景音乐" aria-pressed="false">
         <span class="music-icon" id="musicIcon"></span>
-      </div>
+      </button>
     </div>
     <h1 class="page-title">异者启示录世界观设定</h1>
     <p class="author-info secondary">原创：<span style="color: #9c27b0; font-weight: 500;">零感庭</span></p>
@@ -99,18 +99,18 @@
   </div>
 
   <!-- 返回顶部按钮 -->
-  <button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+  <button type="button" class="back-to-top" id="backToTop" title="返回顶部" aria-label="返回顶部">↑</button>
 
   <script src="../js/state-manager.js"></script>
   <script src="../js/shared.js"></script>
   <script src="../js/script.js"></script>
   <!-- 页脚信息 -->
-  <footer style="background-color: #e8eaf6; text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #c5cae9; color: #666;">
-    <p style="margin: 0.5rem 0;">该网页由AI辅助生成</p>
-    <p style="margin: 0.5rem 0;">制作人：壹心</p>
-    <p style="margin: 0.5rem 0;">问题指导：孤颜</p>
-    <p style="margin: 0.5rem 0;">特别鸣谢：山鬼</p>
-    <p style="margin: 0.5rem 0;">BGM：安息日   来源：褚峖</p>
+  <footer class="page-footer">
+    <p>该网页由AI辅助生成</p>
+    <p>制作人：壹心</p>
+    <p>问题指导：孤颜</p>
+    <p>特别鸣谢：山鬼</p>
+    <p>BGM：安息日   来源：褚峖</p>
   </footer>
 </body>
 </html>
