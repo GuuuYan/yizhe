@@ -396,6 +396,7 @@ iframe {
   color: var(--anime-muted);
 }
 
+html.dark-mode,
 body.dark-mode {
   color-scheme: dark;
   background:
@@ -1060,6 +1061,7 @@ body.dark-mode .org-box {
   }
 }
 
+html.light-mode,
 body.light-mode {
   color-scheme: light;
   --anime-bg: #f8fbff;

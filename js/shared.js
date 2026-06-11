@@ -147,6 +147,9 @@ function initDarkMode() {
   if (!modeToggle || !modeIcon) return;
 
   const applyMode = (isDarkMode) => {
+    const root = document.documentElement;
+    root.classList.toggle('dark-mode', isDarkMode);
+    root.classList.toggle('light-mode', !isDarkMode);
     document.body.classList.toggle('dark-mode', isDarkMode);
     document.body.classList.toggle('light-mode', !isDarkMode);
 
