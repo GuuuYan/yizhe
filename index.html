@@ -6,36 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="page-id" content="home">
   <meta name="page-title" content="首页">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23070917'/%3E%3Cpath d='M41 13a22 22 0 1 0 0 38' fill='none' stroke='%2335d4ff' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M31 20l14 12-14 12z' fill='%237c5cff'/%3E%3C/svg%3E">
   <title>异者启示录世界观设定</title>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/anime-style.css">
 </head>
 
-<body class="home-page">
-  <header class="page-header">
-    <h1 class="page-title">异者启示录世界观设定</h1>
-    <p class="author-info secondary">原创：<span style="color: #9c27b0; font-weight: 500;">零感庭</span></p>
-  </header>
+<body class="home-page anime-home-page">
+  <div class="anime-shell">
+    <header class="anime-topbar" aria-label="首页顶部导航">
+      <a class="brand-mark nav-link" href="./index.html" aria-label="返回首页">
+        <span class="brand-sigil" aria-hidden="true"></span>
+        <span>异者启示录 · ARCHIVE</span>
+      </a>
 
-  <div class="main-container">
-    <aside class="sidebar">
-      <nav class="nav-container">
-        <h2 class="nav-title">世界观导航</h2>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="./pages/map.html" class="nav-link">地图</a></li>
-          <li class="nav-item"><a href="./pages/objects.html" class="nav-link">物体</a></li>
-          <li class="nav-item"><a href="./pages/events.html" class="nav-link">事件</a></li>
-          <li class="nav-item"><a href="./pages/terms.html" class="nav-link">名词</a></li>
-          <li class="nav-item"><a href="./pages/organizations.html" class="nav-link">组织</a></li>
-          <li class="nav-item"><a href="./pages/countries.html" class="nav-link">国度</a></li>
-          <li class="nav-item"><a href="./pages/other.html" class="nav-link">其他设定</a></li>
-          <li class="nav-item"><a href="./pages/mythology.html" class="nav-link">神话</a></li>
-          <li class="nav-item"><a href="./pages/timeline.html" class="nav-link">世界时间线</a></li>
-        </ul>
+      <nav class="nav-pills" aria-label="世界观导航">
+        <a href="./pages/map.html" class="nav-link">地图</a>
+        <a href="./pages/objects.html" class="nav-link">物体</a>
+        <a href="./pages/events.html" class="nav-link">事件</a>
+        <a href="./pages/terms.html" class="nav-link">名词</a>
+        <a href="./pages/organizations.html" class="nav-link">组织</a>
+        <a href="./pages/countries.html" class="nav-link">国度</a>
+        <a href="./pages/timeline.html" class="nav-link">世界时间线</a>
       </nav>
-    </aside>
 
-    <main class="content-area">
-      <div class="header-controls home-main-controls">
+      <div class="header-controls anime-header-controls">
         <button type="button" class="mode-toggle" id="modeToggle" title="开启夜间模式" aria-label="切换夜间模式"
           aria-pressed="false">
           <span class="mode-icon" id="modeIcon">☀️</span>
@@ -45,18 +41,58 @@
           <span class="music-icon" id="musicIcon"></span>
         </button>
       </div>
+    </header>
 
-      <div class="image-slider">
+    <main>
+      <section class="anime-hero" aria-labelledby="hero-title">
+        <div class="anime-hero-copy reveal">
+          <div class="eyebrow">Worldview Intelligence File</div>
+          <h1 id="hero-title" class="anime-logo-title">
+            <span class="title-main">异者启示录</span>
+            <span class="title-sub">世界观设定</span>
+          </h1>
+          <p class="hero-lead">这是一个原创 IP 世界观的综合介绍网站。在这里，你可以探索一个充满异能、神秘和冒险的世界。</p>
+          <p class="author-info secondary">原创：<span>零感庭</span></p>
+          <div class="hero-actions" aria-label="主要入口">
+            <a class="btn primary" href="#archives">进入世界观档案</a>
+            <a class="btn primary" href="#episode">查看OP</a>
+          </div>
+        </div>
+
+        <div class="poster-stack reveal" aria-label="首页视觉展示">
+          <figure class="poster-card">
+            <img src="./picture/headPic.jpg" alt="异者启示录视觉背景" width="900" height="1200">
+            <figcaption class="poster-label">
+              <strong>九国、异种与神领遗痕</strong>
+              <span>把资料站包装成一套可探索的世界档案系统。</span>
+            </figcaption>
+          </figure>
+          <aside class="floating-panel" aria-label="档案状态演示">
+            <div class="section-kicker">Archive Status</div>
+            <div class="signal-line"><span>异能波动</span>
+              <div class="meter"><span style="width: 82%"></span></div>
+            </div>
+            <div class="signal-line"><span>神话残响</span>
+              <div class="meter"><span style="width: 66%"></span></div>
+            </div>
+            <div class="signal-line"><span>九国记录</span>
+              <div class="meter"><span style="width: 91%"></span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="image-slider reveal" aria-label="首页世界观轮播图">
         <div class="slider-container">
           <div class="slider-wrapper">
             <div class="slider-item">
-              <img src="./picture/A.png" alt="首页展示图 A">
+              <img src="./picture/A.png" alt="首页展示图 A" width="1200" height="400">
             </div>
             <div class="slider-item">
-              <img src="./picture/B.png" alt="首页展示图 B">
+              <img src="./picture/B.png" alt="首页展示图 B" width="1200" height="400" loading="lazy">
             </div>
             <div class="slider-item">
-              <img src="./picture/C.png" alt="首页展示图 C">
+              <img src="./picture/C.png" alt="首页展示图 C" width="1200" height="400" loading="lazy">
             </div>
           </div>
         </div>
@@ -66,34 +102,129 @@
         </div>
       </div>
 
-      <section class="home-intro">
-        <h2 class="section-title">欢迎来到异者启示录</h2>
-        <p>第一集正片：</p>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-          <iframe
-            src="https://player.bilibili.com/player.html?isOutside=true&aid=1653888191&bvid=BV1ZE421V7Up&cid=1527776041&p=1"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen
-            sandbox="allow-same-origin allow-scripts allow-popups" title="异者启示录第一集视频播放器">
-          </iframe>
+      <section id="archives" aria-labelledby="archives-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Archive Directory</div>
+            <h2 id="archives-title">世界观档案目录</h2>
+          </div>
+          <p class="section-note">你可以访问以下内容：</p>
         </div>
-        <div class="content-paragraph">
-          <p>这是一个原创 IP 世界观的综合介绍网站。在这里，你可以探索一个充满异能、神秘和冒险的世界。</p>
-          <p>通过左侧导航栏，你可以访问以下内容：</p>
-          <ul>
-            <li><strong>地图</strong> - 了解世界的地理布局</li>
-            <li><strong>物体</strong> - 发现世界中的神秘物品</li>
-            <li><strong>事件</strong> - 回顾历史上的重要事件</li>
-            <li><strong>名词</strong> - 学习世界观中的关键概念</li>
-            <li><strong>组织</strong> - 认识世界中的各大组织</li>
-            <li><strong>国度</strong> - 探索九大国度的特色</li>
-            <li><strong>其他设定</strong> - 发现美食、节日、植物和药水</li>
-            <li><strong>神话</strong> - 阅读世界的创世神话</li>
-            <li><strong>世界时间线</strong> - 追踪历史的发展脉络</li>
-          </ul>
-          <p>开始你的探索之旅吧。</p>
+
+        <div class="archive-grid">
+          <a class="archive-card reveal" href="./pages/map.html">
+            <span class="card-index">FILE 01</span>
+            <span class="card-title">地图</span>
+            <span class="card-desc">了解世界的地理布局。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/objects.html">
+            <span class="card-index">FILE 02</span>
+            <span class="card-title">物体</span>
+            <span class="card-desc">发现世界中的神秘物品。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/events.html">
+            <span class="card-index">FILE 03</span>
+            <span class="card-title">事件</span>
+            <span class="card-desc">回顾历史上的重要事件。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/terms.html">
+            <span class="card-index">FILE 04</span>
+            <span class="card-title">名词</span>
+            <span class="card-desc">学习世界观中的关键概念。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/organizations.html">
+            <span class="card-index">FILE 05</span>
+            <span class="card-title">组织</span>
+            <span class="card-desc">认识世界中的各大组织。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/countries.html">
+            <span class="card-index">FILE 06</span>
+            <span class="card-title">国度</span>
+            <span class="card-desc">探索九大国度的特色。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/other.html">
+            <span class="card-index">FILE 07</span>
+            <span class="card-title">其他设定</span>
+            <span class="card-desc">发现美食、节日、植物和药水。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/mythology.html">
+            <span class="card-index">FILE 08</span>
+            <span class="card-title">神话</span>
+            <span class="card-desc">阅读世界的创世神话。</span>
+          </a>
+          <a class="archive-card reveal" href="./pages/timeline.html">
+            <span class="card-index">FILE 09</span>
+            <span class="card-title">世界时间线</span>
+            <span class="card-desc">追踪历史的发展脉络。</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="episode" aria-labelledby="episode-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Broadcast Area</div>
+            <h2 id="episode-title">异者启示录OP</h2>
+          </div>
+          <p class="section-note">开始你的探索之旅吧。</p>
+        </div>
+
+        <article class="episode-panel episode-panel-wide">
+          <div class="episode-tag">EPISODE 01</div>
+          <h3 class="episode-title">异能、神秘和冒险的开端</h3>
+          <div class="video-embed">
+            <iframe
+              src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV15e411f73P&p=1&autoplay=0"
+              frameborder="0" allow="fullscreen" sandbox="allow-same-origin allow-scripts allow-popups"
+              title="异者启示录OP视频播放器">
+            </iframe>
+          </div>
+        </article>
+      </section>
+
+      <section id="map" aria-labelledby="map-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Cartography</div>
+            <h2 id="map-title">地图</h2>
+          </div>
+          <div class="map-switch" aria-label="地图版本切换">
+            <button type="button" class="map-switch-btn active" data-map-src="./picture/世界地图.png" data-map-alt="现代世界地图"
+              aria-pressed="true">现代地图</button>
+            <button type="button" class="map-switch-btn" data-map-src="./picture/世界地图-古代.png" data-map-alt="古代世界地图"
+              aria-pressed="false">古代地图</button>
+          </div>
+        </div>
+
+        <div class="map-showcase">
+          <img class="home-map-image" src="./picture/世界地图.png" alt="现代世界地图" width="1179" height="707" loading="lazy">
+        </div>
+      </section>
+
+      <section id="timeline" aria-labelledby="timeline-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chronicle</div>
+            <h2 id="timeline-title">世界时间线</h2>
+          </div>
+          <p class="section-note">以完整时间轴图呈现世界主线。</p>
+        </div>
+
+        <div class="timeline-drag-area timeline-image-viewer" aria-label="可横向拖动的世界时间线图片">
+          <button type="button" class="timeline-image-button" aria-label="放大查看世界时间线图片">
+            <img class="timeline-image" src="./picture/时间轴.jpg" alt="世界时间线图" loading="lazy">
+          </button>
         </div>
       </section>
     </main>
+
+    <footer class="page-footer anime-footer">
+      <p>该网页由AI辅助生成</p>
+      <p>制作人：壹心</p>
+      <p>问题指导：孤颜</p>
+      <p>特别鸣谢：山鬼</p>
+      <p>BGM：安息日 来源：褚峖</p>
+    </footer>
   </div>
 
   <button type="button" id="backToTop" class="back-to-top" title="返回顶部" aria-label="返回顶部">↑</button>
@@ -101,14 +232,6 @@
   <script src="./js/state-manager.js"></script>
   <script src="./js/shared.js"></script>
   <script src="./js/script.js"></script>
-
-  <footer class="page-footer">
-    <p>该网页由AI辅助生成</p>
-    <p>制作人：壹心</p>
-    <p>问题指导：孤颜</p>
-    <p>特别鸣谢：山鬼</p>
-    <p>BGM：安息日 来源：褚峖</p>
-  </footer>
 </body>
 
 </html>

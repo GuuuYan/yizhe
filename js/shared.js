@@ -146,34 +146,28 @@ function initDarkMode() {
 
   if (!modeToggle || !modeIcon) return;
 
-  const isDarkMode = StateManager.getDarkMode();
+  const applyMode = (isDarkMode) => {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle('light-mode', !isDarkMode);
 
-  if (isDarkMode) {
-    document.body.classList.add('dark-mode');
-    modeIcon.textContent = '🌙';
-    modeToggle.title = '关闭夜间模式';
-    modeToggle.setAttribute('aria-pressed', 'true');
-  } else {
-    document.body.classList.remove('dark-mode');
-    modeIcon.textContent = '☀️';
-    modeToggle.title = '开启夜间模式';
-    modeToggle.setAttribute('aria-pressed', 'false');
-  }
-
-  modeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-
-    if (document.body.classList.contains('dark-mode')) {
+    if (isDarkMode) {
       modeIcon.textContent = '🌙';
       modeToggle.title = '关闭夜间模式';
       modeToggle.setAttribute('aria-pressed', 'true');
-      StateManager.setDarkMode(true);
-    } else {
-      modeIcon.textContent = '☀️';
-      modeToggle.title = '开启夜间模式';
-      modeToggle.setAttribute('aria-pressed', 'false');
-      StateManager.setDarkMode(false);
+      return;
     }
+
+    modeIcon.textContent = '☀️';
+    modeToggle.title = '开启夜间模式';
+    modeToggle.setAttribute('aria-pressed', 'false');
+  };
+
+  applyMode(StateManager.getDarkMode());
+
+  modeToggle.addEventListener('click', () => {
+    const isDarkMode = !document.body.classList.contains('dark-mode');
+    applyMode(isDarkMode);
+    StateManager.setDarkMode(isDarkMode);
   });
 }
 

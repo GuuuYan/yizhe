@@ -53,6 +53,7 @@ const StateManager = (() => {
     // 夜间模式相关
     getDarkMode: () => {
       const value = getItem('darkMode');
+      if (value === null) return true;
       return value === 'true';
     },
 
