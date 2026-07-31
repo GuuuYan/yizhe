@@ -37,6 +37,22 @@ SECTION_BLOCK_RE = re.compile(
     re.DOTALL,
 )
 ASSET_DIRS = ("picture", "voice")
+SYNC_PAGE_FILENAMES = (
+    "map.html",
+    "objects.html",
+    "events.html",
+    "terms.html",
+    "organizations.html",
+    "countries.html",
+    "other.html",
+    "mythology.html",
+    "timeline.html",
+)
+
+
+def iter_sync_pages(pages_dir: Path) -> list[Path]:
+    """Return only the original split worldbuilding pages in stable order."""
+    return [pages_dir / filename for filename in SYNC_PAGE_FILENAMES if (pages_dir / filename).exists()]
 
 
 @dataclass
@@ -614,7 +630,7 @@ def sync_split_pages_from_source(source_path: Path, pages_dir: Path) -> list[str
     source_sections = extract_section_html_map(source_html)
     updated_files: list[str] = []
 
-    for page_path in sorted(pages_dir.glob("*.html")):
+    for page_path in iter_sync_pages(pages_dir):
         current_html = page_path.read_text(encoding="utf-8")
         page_doc = extract_document(page_path)
         section_id = page_doc.get("page_id") or page_path.stem
@@ -662,7 +678,7 @@ def main() -> None:
         updated_files = sync_split_pages_from_source(source_path, pages_dir)
 
     source_doc = extract_document(source_path)
-    page_docs = [extract_document(path) for path in sorted(pages_dir.glob("*.html"))]
+    page_docs = [extract_document(path) for path in iter_sync_pages(pages_dir)]
     report = compare_source_to_pages(source_doc, page_docs)
 
     source_output = output_dir / "indexyuan-structured.json"

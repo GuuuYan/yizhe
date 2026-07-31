@@ -36,6 +36,29 @@ function initNavHighlight() {
   });
 }
 
+function initCharacterArchiveNav() {
+  const isModulePage = window.location.pathname.includes('/pages/');
+  const href = isModulePage ? './characters.html' : './pages/characters.html';
+
+  document.querySelectorAll('.nav-pills, .nav-list').forEach((container) => {
+    if (container.querySelector('a[href*="characters.html"]')) return;
+    const link = document.createElement('a');
+    link.href = href;
+    link.className = 'nav-link';
+    link.textContent = '角色档案';
+
+    if (container.matches('.nav-list')) {
+      const item = document.createElement('li');
+      item.className = 'nav-item';
+      item.append(link);
+      container.append(item);
+      return;
+    }
+
+    container.append(link);
+  });
+}
+
 function initBackToTop() {
   const backToTopBtn = document.getElementById('backToTop');
   if (!backToTopBtn) return;
@@ -176,6 +199,8 @@ function initDarkMode() {
 
 function initSharedFeatures() {
   console.log('初始化共享功能');
+  window.ArchivePage?.enhanceArchivePage(document);
+  initCharacterArchiveNav();
   initNavHighlight();
   initBackToTop();
   initBackgroundMusic();

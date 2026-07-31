@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="page-id" content="characters">
+  <meta name="page-title" content="角色档案">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050811'/%3E%3Cpath d='M41 13a22 22 0 1 0 0 38' fill='none' stroke='%236bd9ff' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M31 20l14 12-14 12z' fill='%236bd9ff'/%3E%3C/svg%3E">
+  <title>角色档案 - 异者启示录世界观设定集</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/anime-style.css">
+  <link rel="stylesheet" href="../css/characters.css">
+</head>
+<body class="character-page">
+  <header class="page-header">
+    <div class="header-controls">
+      <button type="button" class="mode-toggle" id="modeToggle" title="切换夜间模式" aria-label="切换夜间模式" aria-pressed="false">
+        <span class="mode-icon" id="modeIcon">🌙</span>
+      </button>
+      <button type="button" class="music-toggle" id="musicToggle" title="切换背景音乐" aria-label="切换背景音乐" aria-pressed="false">
+        <span class="music-icon" id="musicIcon"></span>
+      </button>
+    </div>
+    <h1 class="page-title">异者启示录世界观设定</h1>
+    <p class="author-info secondary">原创：<span style="color: #9c27b0; font-weight: 500;">零感庭</span></p>
+  </header>
+
+  <div class="main-container">
+    <aside class="sidebar">
+      <nav class="nav-container">
+        <h3 class="nav-title">世界观导航</h3>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../index.html" class="nav-link">主页</a></li>
+          <li class="nav-item"><a href="./map.html" class="nav-link">地图</a></li>
+          <li class="nav-item"><a href="./objects.html" class="nav-link">物体</a></li>
+          <li class="nav-item"><a href="./events.html" class="nav-link">事件</a></li>
+          <li class="nav-item"><a href="./terms.html" class="nav-link">名词</a></li>
+          <li class="nav-item"><a href="./organizations.html" class="nav-link">组织</a></li>
+          <li class="nav-item"><a href="./countries.html" class="nav-link">国度</a></li>
+          <li class="nav-item"><a href="./other.html" class="nav-link">其他设定</a></li>
+          <li class="nav-item"><a href="./mythology.html" class="nav-link">神话</a></li>
+          <li class="nav-item"><a href="./timeline.html" class="nav-link">世界时间线</a></li>
+          <li class="nav-item"><a href="./characters.html" class="nav-link active">角色档案</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content-area">
+      <section class="section character-archive-section" aria-labelledby="character-page-title">
+        <h2 id="character-page-title" class="section-title">角色档案</h2>
+        <section class="character-directory-panel archive-record-card" aria-label="角色目录">
+          <div class="directory-heading">
+            <div>
+              <span class="panel-index">01</span>
+              <h2>人员目录</h2>
+            </div>
+            <span id="characterCount" class="character-count"></span>
+          </div>
+          <label class="character-search-label" for="characterSearch">检索姓名或正文</label>
+          <input id="characterSearch" class="character-search" type="search" placeholder="输入角色名…" autocomplete="off">
+          <div id="categoryFilters" class="category-filters" aria-label="阵营筛选"></div>
+          <div id="characterDirectory" class="character-directory" aria-live="polite"></div>
+          <div class="directory-actions">
+            <button id="openRelationshipMap" class="relationship-map-button" type="button">
+              <span>RELATION MAP</span>
+              查看全角色关系星图
+            </button>
+            <button id="appendixButton" class="appendix-button" type="button">
+              <span>APPENDIX</span>
+              第一季战力排行
+            </button>
+          </div>
+        </section>
+
+        <section class="character-dossier" aria-live="polite" aria-labelledby="activeCharacterName">
+          <div class="dossier-masthead archive-record-card">
+            <div class="portrait-placeholder" aria-label="角色立绘占位">
+              <span class="portrait-code" id="portraitCode">A-01</span>
+              <span class="portrait-silhouette" aria-hidden="true"></span>
+              <span class="portrait-note">角色立绘待补</span>
+            </div>
+            <div class="dossier-identity">
+              <p class="dossier-category" id="activeCategory">主角团</p>
+              <h2 id="activeCharacterName">幻易</h2>
+              <div class="dossier-stamps">
+                <span id="activeFileCode">CAST-01 / 001</span>
+                <span>原始资料收录</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-body-grid">
+            <article class="source-document archive-record-card" aria-label="角色原始档案正文">
+              <div class="document-heading">
+                <span class="panel-index">02</span>
+                <div>
+                  <h3>完整档案</h3>
+                  <p>以下内容按资料原文展示</p>
+                </div>
+              </div>
+              <div id="characterContent" class="character-content"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="appendixView" class="character-dossier appendix-view archive-record-card" hidden aria-labelledby="appendixTitle">
+          <div class="appendix-head">
+            <p class="dossier-category">ARCHIVE APPENDIX</p>
+            <h2 id="appendixTitle">第一季战力排行</h2>
+            <p>以下内容按资料原文展示</p>
+          </div>
+          <article id="appendixContent" class="character-content appendix-content"></article>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="relationshipMapModal" class="relationship-map-modal" hidden>
+    <section id="relationshipMapDialog" class="relationship-map-dialog" role="dialog" aria-modal="true" aria-labelledby="relationshipMapTitle">
+      <header class="relationship-map-header">
+        <div>
+          <p class="relationship-map-kicker">PERSONNEL RELATION NETWORK</p>
+          <h2 id="relationshipMapTitle">全角色关系星图</h2>
+        </div>
+        <button id="closeRelationshipMap" class="relationship-map-close" type="button" aria-label="关闭全角色关系星图">×</button>
+      </header>
+      <div class="relationship-map-toolbar">
+        <label for="relationshipMapCharacterSelect">聚焦角色</label>
+        <select id="relationshipMapCharacterSelect"></select>
+        <p class="relationship-map-counts">
+          <span><strong id="relationshipMapNodeCount">54</strong> 角色节点</span>
+          <span><strong id="relationshipMapEdgeCount">36</strong> 关系连线</span>
+        </p>
+      </div>
+      <div class="relationship-map-stage">
+        <canvas id="relationshipMapCanvas" aria-label="可拖动、缩放并点击角色节点的全角色关系图"></canvas>
+        <p class="relationship-map-hint">滚轮缩放 · 拖动画布 · 点击节点聚焦</p>
+      </div>
+      <footer class="relationship-map-inspector">
+        <div>
+          <span class="relationship-map-status">CURRENT FOCUS</span>
+          <strong id="relationshipMapFocusName">全部角色</strong>
+          <small id="relationshipMapFocusMeta">点击任一节点，仅显示其直接关系</small>
+        </div>
+        <button id="relationshipMapViewCharacter" type="button" disabled>查看角色档案</button>
+      </footer>
+    </section>
+  </div>
+
+  <button type="button" id="backToTop" class="back-to-top" title="返回顶部" aria-label="返回顶部">↑</button>
+  <script src="../js/state-manager.js"></script>
+  <script src="../js/characters-data.js"></script>
+  <script src="../js/archive-page.js"></script>
+  <script src="../js/shared.js"></script>
+  <script src="../js/character-relationship-map.js"></script>
+  <script src="../js/characters.js"></script>
+</body>
+</html>
