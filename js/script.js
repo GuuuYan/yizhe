@@ -195,26 +195,105 @@ function initArchiveCardGlow() {
   });
 }
 
+function setDeferredMediaLoading(container) {
+  const requestId = String((Number(container.dataset.mediaRequestId) || 0) + 1);
+  container.dataset.mediaRequestId = requestId;
+  container.classList.remove('is-ready', 'has-error');
+  container.classList.add('is-loading');
+  container.setAttribute('aria-busy', 'true');
+  return requestId;
+}
+
+function markDeferredMediaError(container, requestId) {
+  if (requestId !== container.dataset.mediaRequestId) return;
+  container.classList.remove('is-loading', 'is-ready');
+  container.classList.add('has-error');
+  container.setAttribute('aria-busy', 'false');
+}
+
+async function revealDeferredImage(container, image, requestId = container.dataset.mediaRequestId) {
+  if (requestId !== container.dataset.mediaRequestId || !image.complete) return;
+  if (!image.naturalWidth) {
+    markDeferredMediaError(container, requestId);
+    return;
+  }
+
+  const expectedSource = image.currentSrc || image.src;
+
+  try {
+    if (typeof image.decode === 'function') await image.decode();
+  } catch {
+    if (!image.naturalWidth) {
+      markDeferredMediaError(container, requestId);
+      return;
+    }
+  }
+
+  if (
+    requestId !== container.dataset.mediaRequestId ||
+    expectedSource !== (image.currentSrc || image.src)
+  ) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    if (requestId !== container.dataset.mediaRequestId) return;
+    container.classList.remove('is-loading', 'has-error');
+    container.classList.add('is-ready');
+    container.setAttribute('aria-busy', 'false');
+  });
+}
+
+function initDeferredMedia() {
+  const containers = document.querySelectorAll('[data-deferred-media]');
+
+  containers.forEach((container) => {
+    const image = container.querySelector('img');
+    if (!image) return;
+
+    setDeferredMediaLoading(container);
+    image.addEventListener('load', () => {
+      revealDeferredImage(container, image);
+    });
+    image.addEventListener('error', () => {
+      markDeferredMediaError(container, container.dataset.mediaRequestId);
+    });
+
+    if (image.complete) {
+      revealDeferredImage(container, image);
+    }
+  });
+}
+
 function initHomeMapSwitcher() {
   const mapImage = document.querySelector('.home-map-image');
+  const mapSource = mapImage?.closest('picture')?.querySelector('source');
+  const mapContainer = mapImage?.closest('[data-deferred-media]');
   const switchButtons = document.querySelectorAll('.map-switch-btn');
 
-  if (!mapImage || !switchButtons.length) return;
+  if (!mapImage || !mapSource || !mapContainer || !switchButtons.length) return;
 
   switchButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const mapSrc = button.dataset.mapSrc;
+      const mapWebp = button.dataset.mapWebp;
       const mapAlt = button.dataset.mapAlt;
 
-      if (!mapSrc || !mapAlt) return;
+      if (!mapSrc || !mapWebp || !mapAlt) return;
 
       switchButtons.forEach((item) => {
         item.classList.toggle('active', item === button);
         item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
       });
 
+      const requestId = setDeferredMediaLoading(mapContainer);
+      mapSource.srcset = mapWebp;
       mapImage.src = mapSrc;
       mapImage.alt = mapAlt;
+
+      if (mapImage.complete) {
+        revealDeferredImage(mapContainer, mapImage, requestId);
+      }
     });
   });
 }
@@ -229,7 +308,7 @@ function initTimelineDrag() {
   let startScrollLeft = 0;
 
   dragArea.addEventListener('pointerdown', (event) => {
-    if (event.button !== 0) return;
+    if (event.button !== 0 || !dragArea.classList.contains('is-ready')) return;
     isDragging = true;
     hasDragged = false;
     startX = event.clientX;
@@ -297,8 +376,8 @@ function initTimelineLightbox() {
 
   const zoomedImage = document.createElement('img');
   zoomedImage.className = 'timeline-lightbox-image';
-  zoomedImage.src = image.currentSrc || image.src;
   zoomedImage.alt = image.alt;
+  zoomedImage.decoding = 'async';
 
   frame.appendChild(zoomedImage);
   lightbox.append(closeButton, frame);
@@ -314,6 +393,7 @@ function initTimelineLightbox() {
   };
 
   const openLightbox = (event) => {
+    if (!dragArea?.classList.contains('is-ready')) return;
     if (dragArea?.dataset.dragMoved === 'true') return;
     if (
       event?.detail !== 0 &&
@@ -352,6 +432,7 @@ function initAll() {
   initHomePagePanelScroll();
   initHomePageTitleFade();
   initArchiveCardGlow();
+  initDeferredMedia();
   initHomeMapSwitcher();
   initTimelineDrag();
   initTimelineLightbox();

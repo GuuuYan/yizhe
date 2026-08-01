@@ -267,28 +267,13 @@ body.character-page {
   background: var(--character-accent-soft);
   outline: none;
 }
-.appendix-button {
-  display: grid;
-  width: 100%;
-  min-height: 52px;
-  margin-top: 0.7rem;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--character-line);
-  background: transparent;
-  text-align: left;
-  cursor: pointer;
-}
-.appendix-button span { color: var(--character-warning); font: 0.65rem Consolas, monospace; letter-spacing: 0.14em; }
-.appendix-button:hover, .appendix-button:focus-visible, .appendix-button.active { border-color: var(--character-warning); background: color-mix(in srgb, var(--character-warning) 10%, transparent); outline: none; }
-
 .directory-actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.7rem;
   margin-top: 0.8rem;
 }
 
-.directory-actions .appendix-button,
 .relationship-map-button {
   min-height: 56px;
   margin-top: 0;
@@ -351,7 +336,7 @@ body.character-page {
   clip-path: polygon(38% 0, 62% 0, 70% 13%, 68% 32%, 84% 45%, 92% 100%, 8% 100%, 16% 45%, 32% 32%, 30% 13%);
 }
 .dossier-identity { align-self: end; padding-bottom: 2.2rem; }
-.dossier-identity h2, .appendix-head h2 {
+.dossier-identity h2 {
   max-width: 850px;
   margin: 0.3rem 0 1rem;
   font-size: clamp(2.8rem, 6vw, 6.4rem);
@@ -385,9 +370,6 @@ body.character-page {
 .character-content .source-record-title { display: none; }
 .character-content .source-list-line { padding-left: 0.7rem; border-left: 2px solid var(--character-line-strong); }
 
-.appendix-head { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--character-line); }
-.appendix-head p:last-child { color: var(--character-muted); }
-.appendix-content { max-width: 920px; }
 .directory-empty { padding: 1rem 0.4rem; color: var(--character-muted); font-size: 0.8rem; }
 
 @media (max-width: 1120px) {
@@ -423,7 +405,7 @@ body.character-page {
   .dossier-masthead { display: block; min-height: 0; }
   .portrait-placeholder { min-height: 300px; margin-bottom: 1.3rem; border-bottom: 1px solid var(--character-line); }
   .dossier-identity { padding-bottom: 1.3rem; }
-  .dossier-identity h2, .appendix-head h2 { font-size: 3.1rem; }
+  .dossier-identity h2 { font-size: 3.1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -633,26 +615,23 @@ body.character-page {
   transform: translateX(2px);
 }
 
-.archive-page .appendix-button {
+.archive-page .relationship-map-button {
   border-color: var(--archive-line-soft);
   border-radius: 8px;
   color: var(--archive-text);
   background: var(--archive-surface-soft);
 }
 
-.archive-page .relationship-map-button {
-  border-color: var(--archive-accent-strong);
-  border-radius: 8px;
-  color: var(--archive-text);
-  background: var(--archive-accent-soft);
-}
-
 .archive-page .relationship-map-button span {
-  color: var(--archive-accent);
+  color: var(--archive-violet);
 }
 
-.archive-page .appendix-button span {
-  color: var(--archive-violet);
+.archive-page .relationship-map-button:hover,
+.archive-page .relationship-map-button:focus-visible {
+  border-color: var(--archive-violet);
+  background: var(--archive-violet-soft);
+  box-shadow: none;
+  outline: none;
 }
 
 .archive-page .character-dossier {
@@ -682,8 +661,7 @@ body.character-page {
   background: var(--archive-accent-strong);
 }
 
-.archive-page .dossier-identity h2,
-.archive-page .appendix-head h2 {
+.archive-page .dossier-identity h2 {
   color: var(--archive-text);
 }
 
@@ -702,13 +680,11 @@ body.character-page {
   min-width: 0;
 }
 
-.archive-page .document-heading,
-.archive-page .appendix-head {
+.archive-page .document-heading {
   border-bottom-color: var(--archive-line);
 }
 
 .archive-page .document-heading p,
-.archive-page .appendix-head p:last-child,
 .archive-page .character-search-label,
 .archive-page .character-count,
 .archive-page .portrait-note {
@@ -726,10 +702,6 @@ body.character-page {
 
 .archive-page .character-content .source-list-line {
   border-left-color: var(--archive-accent-strong);
-}
-
-.archive-page .appendix-view.archive-record-card {
-  padding: clamp(1.3rem, 2.5vw, 2rem);
 }
 
 @media (max-width: 820px) {
@@ -892,6 +864,54 @@ body.relationship-map-open {
   background: var(--archive-surface-soft, var(--character-panel-soft));
 }
 
+.relationship-map-toolbar button {
+  min-height: 42px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--archive-line-soft, var(--character-line));
+  border-radius: 8px;
+  color: var(--archive-text, var(--character-text));
+  background: var(--archive-surface-soft, var(--character-panel-soft));
+  cursor: pointer;
+}
+
+.relationship-map-toolbar button:hover,
+.relationship-map-toolbar button:focus-visible {
+  border-color: var(--archive-accent, var(--character-accent));
+  box-shadow: 0 0 0 3px var(--archive-accent-soft, var(--character-accent-soft));
+  outline: none;
+}
+
+.relationship-map-runtime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  color: var(--archive-muted, var(--character-muted));
+  font: 0.7rem Consolas, monospace;
+}
+
+.relationship-map-runtime i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #62f4c6;
+  box-shadow: 0 0 12px rgba(98, 244, 198, 0.9);
+  animation: relationship-map-pulse 1.8s ease-in-out infinite;
+}
+
+.relationship-map-runtime.is-paused i {
+  background: #91a4b4;
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes relationship-map-pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}
+
 .relationship-map-counts {
   display: flex;
   gap: 1rem;
@@ -908,7 +928,10 @@ body.relationship-map-open {
   position: relative;
   min-height: 0;
   overflow: hidden;
-  background: #070b16;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(43, 128, 184, 0.2), transparent 42%),
+    radial-gradient(circle at 78% 12%, rgba(115, 82, 208, 0.14), transparent 36%),
+    #040813;
 }
 
 #relationshipMapCanvas {
@@ -924,18 +947,46 @@ body.relationship-map-open {
   cursor: grabbing;
 }
 
-.relationship-map-hint {
+.relationship-map-legend {
   position: absolute;
-  right: 1rem;
+  left: 1rem;
   bottom: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  max-width: calc(100% - 2rem);
   margin: 0;
   padding: 0.4rem 0.65rem;
   border: 1px solid rgba(107, 217, 255, 0.18);
-  border-radius: 999px;
+  border-radius: 9px;
   color: rgba(231, 247, 255, 0.72);
   background: rgba(5, 9, 18, 0.74);
   font-size: 0.68rem;
   pointer-events: none;
+}
+
+.relationship-map-legend span {
+  white-space: nowrap;
+}
+
+.relationship-map-legend .is-directed {
+  color: #5ce4ff;
+}
+
+.relationship-map-legend .is-mutual {
+  color: #b19cff;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .relationship-map-inspector {
@@ -978,6 +1029,36 @@ body.relationship-map-open {
   outline: none;
 }
 
+.light-mode.character-page .relationship-map-modal {
+  background: rgba(219, 231, 243, 0.7);
+}
+
+.light-mode.character-page .relationship-map-dialog {
+  background: rgba(245, 250, 253, 0.98);
+  box-shadow: 0 30px 90px rgba(42, 66, 92, 0.2), 0 0 36px rgba(8, 127, 158, 0.1);
+}
+
+.light-mode.character-page .relationship-map-stage {
+  background:
+    radial-gradient(circle at 50% 48%, rgba(71, 164, 201, 0.14), transparent 45%),
+    radial-gradient(circle at 78% 12%, rgba(128, 97, 207, 0.09), transparent 38%),
+    #edf5fa;
+}
+
+.light-mode.character-page .relationship-map-legend {
+  border-color: rgba(20, 105, 138, 0.24);
+  color: #4c6777;
+  background: rgba(248, 252, 254, 0.88);
+}
+
+.light-mode.character-page .relationship-map-legend .is-directed {
+  color: #087f9e;
+}
+
+.light-mode.character-page .relationship-map-legend .is-mutual {
+  color: #6948c7;
+}
+
 @media (max-width: 640px) {
   .directory-actions {
     grid-template-columns: 1fr;
@@ -1007,6 +1088,15 @@ body.relationship-map-open {
     min-width: 0;
   }
 
+  .relationship-map-runtime {
+    margin-right: auto;
+  }
+
+  .relationship-map-toolbar button {
+    min-height: 44px;
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+
   .relationship-map-counts {
     width: 100%;
     margin-left: 0;
@@ -1022,8 +1112,11 @@ body.relationship-map-open {
     width: 100%;
   }
 
-  .relationship-map-hint {
-    display: none;
+  .relationship-map-legend {
+    right: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+    justify-content: center;
   }
 }
 

@@ -9,10 +9,7 @@
     filters: document.getElementById('categoryFilters'),
     directory: document.getElementById('characterDirectory'),
     count: document.getElementById('characterCount'),
-    dossier: document.querySelector('.character-dossier:not(.appendix-view)'),
-    appendix: document.getElementById('appendixView'),
-    appendixButton: document.getElementById('appendixButton'),
-    appendixContent: document.getElementById('appendixContent'),
+    dossier: document.querySelector('.character-dossier'),
     name: document.getElementById('activeCharacterName'),
     category: document.getElementById('activeCategory'),
     fileCode: document.getElementById('activeFileCode'),
@@ -78,8 +75,6 @@
     if (!character) return;
     activeCharacterId = characterId;
     elements.dossier.hidden = false;
-    elements.appendix.hidden = true;
-    elements.appendixButton.classList.remove('active');
     renderDirectory();
     renderDossier(character);
     if (updateHash) history.replaceState(null, '', `#${characterId}`);
@@ -134,30 +129,13 @@
     renderSourceText(elements.content, character.paragraphs);
   }
 
-  function showAppendix() {
-    const appendix = archive.appendices[0];
-    elements.dossier.hidden = true;
-    elements.appendix.hidden = false;
-    elements.appendixButton.classList.add('active');
-    renderSourceText(elements.appendixContent, appendix.paragraphs);
-    renderDirectory();
-    history.replaceState(null, '', '#combat-ranking');
-    document.title = `${appendix.name} - 角色档案`;
-  }
-
   elements.search.addEventListener('input', renderDirectory);
-  elements.appendixButton.addEventListener('click', showAppendix);
   window.addEventListener('hashchange', () => {
     const nextId = decodeURIComponent(location.hash.slice(1));
-    if (nextId === 'combat-ranking') {
-      showAppendix();
-      return;
-    }
-    if (characterById.has(nextId)) showCharacter(nextId, false);
+    showCharacter(characterById.has(nextId) ? nextId : archive.characters[0].id, false);
   });
   renderFilters();
   renderDirectory();
   const hashId = decodeURIComponent(location.hash.slice(1));
-  if (hashId === 'combat-ranking') showAppendix();
-  else showCharacter(characterById.has(hashId) ? hashId : archive.characters[0].id, false);
+  showCharacter(characterById.has(hashId) ? hashId : archive.characters[0].id, false);
 })();

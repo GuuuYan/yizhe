@@ -10,6 +10,10 @@ const scriptPath = path.join(root, 'js', 'characters.js');
 const relationshipMapPath = path.join(root, 'js', 'character-relationship-map.js');
 const stylePath = path.join(root, 'css', 'characters.css');
 const source = require('./fixtures/character-source.json');
+const PLACEHOLDER_NAMES = [
+  '幻海', '蓝枫', '李兆', '凌霜', '白辉', '正月',
+  '阿波德', '西海沙', '蒂拉克', '史蒂夫', '艾莉亚', '莲',
+];
 
 function loadArchive() {
   assert.ok(fs.existsSync(dataPath), '缺少角色档案数据模块');
@@ -25,28 +29,36 @@ test('角色档案页面与独立资源文件存在', () => {
   assert.ok(fs.existsSync(stylePath), '缺少 css/characters.css');
 });
 
-test('角色档案覆盖资料中的 54 个独立角色条目', () => {
+test('保留 54 份原始档案，并增加 12 份资料待补档案', () => {
   const archive = loadArchive();
-  assert.equal(archive.characters.length, 54);
-  assert.equal(new Set(archive.characters.map((item) => item.id)).size, 54);
+  const originals = archive.characters.filter((character) => !character.placeholder);
+  const placeholders = archive.characters.filter((character) => character.placeholder);
+
+  assert.equal(originals.length, 54);
+  assert.equal(placeholders.length, 12);
+  assert.equal(new Set(archive.characters.map((item) => item.id)).size, 66);
+  assert.deepEqual(placeholders.map((character) => character.name), PLACEHOLDER_NAMES);
+  for (const character of placeholders) {
+    assert.equal(character.category, 'pending');
+    assert.equal(character.sourceRange, null);
+    assert.deepEqual(character.paragraphs, [{ index: null, text: '档案资料待补充' }]);
+    assert.deepEqual(character.relations, []);
+  }
 });
 
-test('DOCX 中的全部有效原文逐段且不重复地进入页面数据', () => {
+test('DOCX 中的 54 份角色档案正文逐段进入页面数据', () => {
   const archive = loadArchive();
   const separator = /^—+$/;
-  const structuralIndexes = new Set([
-    ...archive.categories.flatMap((category) => category.sourceIndexes),
-    ...archive.appendices.map((appendix) => appendix.titleIndex),
-  ]);
-  const expected = source.paragraphs.filter(
-    (paragraph) => !separator.test(paragraph.text.trim()) && !structuralIndexes.has(paragraph.index),
-  );
-  const actual = [
-    ...archive.characters.flatMap((character) => character.paragraphs),
-    ...archive.appendices.flatMap((appendix) => appendix.paragraphs),
-  ].sort((a, b) => a.index - b.index);
 
-  assert.deepEqual(actual, expected);
+  for (const character of archive.characters.filter((item) => !item.placeholder)) {
+    const [start, end] = character.sourceRange;
+    const expected = source.paragraphs.filter((paragraph) => (
+      paragraph.index >= start
+      && paragraph.index <= end
+      && !separator.test(paragraph.text.trim())
+    ));
+    assert.deepEqual(character.paragraphs, expected, `${character.name} 正文与 DOCX 基线不一致`);
+  }
 });
 
 test('文本基线对应当前 DOCX/PDF，且 PDF 覆盖全部 DOCX 有效段落', () => {
@@ -126,6 +138,19 @@ test('共享导航提供角色档案入口', () => {
   assert.match(shared, /characters\.html/);
 });
 
+test('第一季战力排行界面、逻辑、数据与样式已彻底移除', () => {
+  const archive = loadArchive();
+  const html = fs.readFileSync(pagePath, 'utf8');
+  const script = fs.readFileSync(scriptPath, 'utf8');
+  const css = fs.readFileSync(stylePath, 'utf8');
+
+  assert.equal(Object.hasOwn(archive, 'appendices'), false);
+  assert.doesNotMatch(html, /appendix|combat-ranking|第一季战力排行/i);
+  assert.doesNotMatch(script, /appendix|combat-ranking|showAppendix/i);
+  assert.doesNotMatch(css, /\.appendix/i);
+  assert.match(html, /id="openRelationshipMap"/);
+});
+
 test('角色页标题、正文标题与全角色关系图结构完整', () => {
   const html = fs.readFileSync(pagePath, 'utf8');
   const css = fs.readFileSync(stylePath, 'utf8');
@@ -140,9 +165,20 @@ test('角色页标题、正文标题与全角色关系图结构完整', () => {
     'relationshipMapCharacterSelect',
     'relationshipMapViewCharacter',
     'closeRelationshipMap',
+    'relationshipMapRunState',
+    'relationshipMapPause',
+    'relationshipMapReset',
+    'relationshipMapLegend',
+    'relationshipMapLiveSummary',
   ]) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
+  assert.match(html, /单向关系/);
+  assert.match(html, /双向关系/);
+  assert.doesNotMatch(html, /id="relationshipMapNodeCount">\d+/);
+  assert.doesNotMatch(html, /id="relationshipMapEdgeCount">\d+/);
+  assert.match(css, /\.relationship-map-legend/);
+  assert.match(css, /\.light-mode\.character-page[\s\S]*\.relationship-map-dialog/);
 
   const dataIndex = html.indexOf('../js/characters-data.js');
   const mapIndex = html.indexOf('../js/character-relationship-map.js');

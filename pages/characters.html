@@ -65,10 +65,6 @@
               <span>RELATION MAP</span>
               查看全角色关系星图
             </button>
-            <button id="appendixButton" class="appendix-button" type="button">
-              <span>APPENDIX</span>
-              第一季战力排行
-            </button>
           </div>
         </section>
 
@@ -103,14 +99,6 @@
           </div>
         </section>
 
-        <section id="appendixView" class="character-dossier appendix-view archive-record-card" hidden aria-labelledby="appendixTitle">
-          <div class="appendix-head">
-            <p class="dossier-category">ARCHIVE APPENDIX</p>
-            <h2 id="appendixTitle">第一季战力排行</h2>
-            <p>以下内容按资料原文展示</p>
-          </div>
-          <article id="appendixContent" class="character-content appendix-content"></article>
-        </section>
       </section>
     </main>
   </div>
@@ -127,14 +115,25 @@
       <div class="relationship-map-toolbar">
         <label for="relationshipMapCharacterSelect">聚焦角色</label>
         <select id="relationshipMapCharacterSelect"></select>
+        <p class="relationship-map-runtime">
+          <i aria-hidden="true"></i>
+          <span id="relationshipMapRunState">微重力演算中</span>
+        </p>
+        <button id="relationshipMapPause" type="button">暂停物理</button>
+        <button id="relationshipMapReset" type="button">重置球体</button>
         <p class="relationship-map-counts">
-          <span><strong id="relationshipMapNodeCount">54</strong> 角色节点</span>
-          <span><strong id="relationshipMapEdgeCount">36</strong> 关系连线</span>
+          <span><strong id="relationshipMapNodeCount"></strong> 关系节点</span>
+          <span><strong id="relationshipMapEdgeCount"></strong> 条关系</span>
         </p>
       </div>
       <div class="relationship-map-stage">
-        <canvas id="relationshipMapCanvas" aria-label="可拖动、缩放并点击角色节点的全角色关系图"></canvas>
-        <p class="relationship-map-hint">滚轮缩放 · 拖动画布 · 点击节点聚焦</p>
+        <canvas id="relationshipMapCanvas" aria-label="三维球体内可旋转、缩放并点击聚焦的全角色关系星图"></canvas>
+        <p id="relationshipMapLegend" class="relationship-map-legend" aria-label="关系方向图例">
+          <span class="is-directed">→ 单向关系</span>
+          <span class="is-mutual">↔ 双向关系</span>
+          <span>拖动旋转 · 滚轮缩放 · 点击聚焦</span>
+        </p>
+        <p id="relationshipMapLiveSummary" class="visually-hidden" aria-live="polite"></p>
       </div>
       <footer class="relationship-map-inspector">
         <div>

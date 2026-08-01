@@ -197,15 +197,26 @@
             <h2 id="map-title">地图</h2>
           </div>
           <div class="map-switch" aria-label="地图版本切换">
-            <button type="button" class="map-switch-btn active" data-map-src="./picture/世界地图.png" data-map-alt="现代世界地图"
+            <button type="button" class="map-switch-btn active" data-map-src="./picture/世界地图.png"
+              data-map-webp="./picture/世界地图.webp" data-map-alt="现代世界地图"
               aria-pressed="true">现代地图</button>
-            <button type="button" class="map-switch-btn" data-map-src="./picture/世界地图-古代.png" data-map-alt="古代世界地图"
+            <button type="button" class="map-switch-btn" data-map-src="./picture/世界地图-古代.png"
+              data-map-webp="./picture/世界地图-古代.webp" data-map-alt="古代世界地图"
               aria-pressed="false">古代地图</button>
           </div>
         </div>
 
-        <div class="map-showcase">
-          <img class="home-map-image" src="./picture/世界地图.png" alt="现代世界地图" width="1179" height="707" loading="lazy">
+        <div class="map-showcase deferred-media" data-deferred-media aria-busy="true">
+          <picture class="home-map-picture">
+            <source srcset="./picture/世界地图.webp" type="image/webp">
+            <img class="home-map-image" src="./picture/世界地图.png" alt="现代世界地图" width="1179" height="707"
+              loading="lazy" decoding="async" fetchpriority="low">
+          </picture>
+          <div class="media-loading-layer" aria-live="polite">
+            <span class="media-loading-spinner" aria-hidden="true"></span>
+            <span class="media-loading-label">正在解码完整地图档案</span>
+            <span class="media-loading-error">地图档案加载失败，请刷新重试</span>
+          </div>
         </div>
       </section>
 
@@ -218,10 +229,20 @@
           <p class="section-note">以完整时间轴图呈现世界主线。</p>
         </div>
 
-        <div class="timeline-drag-area timeline-image-viewer" aria-label="可横向拖动的世界时间线图片">
+        <div class="timeline-drag-area timeline-image-viewer deferred-media" data-deferred-media aria-busy="true"
+          aria-label="可横向拖动的世界时间线图片">
           <button type="button" class="timeline-image-button" aria-label="放大查看世界时间线图片">
-            <img class="timeline-image" src="./picture/时间轴.jpg" alt="世界时间线图" loading="lazy">
+            <picture>
+              <source srcset="./picture/时间轴.avif" type="image/avif">
+              <img class="timeline-image" src="./picture/时间轴.jpg" alt="世界时间线图" width="17717" height="2362"
+                loading="lazy" decoding="async" fetchpriority="low">
+            </picture>
           </button>
+          <div class="media-loading-layer" aria-live="polite">
+            <span class="media-loading-spinner" aria-hidden="true"></span>
+            <span class="media-loading-label">正在解码完整时间线档案</span>
+            <span class="media-loading-error">时间线档案加载失败，请刷新重试</span>
+          </div>
         </div>
       </section>
     </main>

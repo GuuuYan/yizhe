@@ -1,3 +1,210 @@
+const RELATIONSHIP_SOURCE = `幻易 ↔ 好友 ↔ 天光
+幻易 ↔ 好友 ↔ 凌至
+幻易 ↔ 室友 ↔ 正闲
+幻易 ↔ 认识 ↔ 初雨
+蓝枫 → 母亲 → 幻易
+幻海 → 父亲 → 幻易
+幻诚 → 祖宗 → 幻海
+幻诚 → 臣民 → 天空
+言洛和 → 祖宗 → 李兆
+言洛和 → 臣民 → 黄沙
+李兆 → 父亲 → 天光
+李兆 ↔ 兄弟 ↔ 孔青冥
+孔青冥 ↔ 夫妻 ↔ 姜曦
+孔青冥 → 师父 → 天光
+天光 → 养子 → 孔青冥
+姜曦 → 师母 → 天光
+天光 → 粉丝 → 凌至
+天光 ↔ 好友 ↔ 柒月
+凌至 → 好友 → 天光
+凌至 ↔ 好友 ↔ 初雨
+凌至 → 认识 → 柒月
+凌霜 → 父亲 → 凌至
+白辉 → 母亲 → 凌至
+凌聆 → 祖宗 → 凌青石
+奎拉斯尔 → 护卫 → 凌至
+瑰宁 → 护卫 → 凌至
+凌青石 → 父亲 → 凌霜
+凌青石 → 老师 → 奎拉斯尔
+凌青石 ↔ 挚友 ↔ 海兹魁
+海兹魁 → 下属 → 瑰宁
+瑰宁 ↔ 同事 ↔ 奎拉斯尔
+艾莉满 → 祖宗 → 初雨
+初雨 ↔ 闺蜜 ↔ 柒月
+柒尹 → 祖宗 → 柒月
+正闲 ↔ 姐弟 ↔ 正月
+正闲 → 电诈 → 阿波德
+正闲 ↔ 战友 ↔ 西海沙
+西海沙 → 追查 → 窥视
+阿波德 → 利用 → 正闲
+阿波德 → 控制 → 正月
+阿波德 ↔ 同事 ↔ 迷乱
+迷乱 → 灭门仇人 → 正闲
+焚 ↔ 兄妹 ↔ 冥
+焚 ↔ 战略合作 ↔ 正闲
+冥 ↔ 战略合作 ↔ 正闲
+焚 → 指导 → 幻易
+焚 ↔ 合作 ↔ 蒂莫
+焚 → 克制 → 领袖
+栖南 → 领导 → 艾尔娜
+栖南 → 领导 → 伊文（Even）
+栖南 → 领导 → 匿影
+匿影 ↔ 好姐妹 ↔ 艾尔娜
+匿影 → 知道 → 蒂莫
+匿影 ↔ 亲人 ↔ 焚
+匿影 ↔ 亲人 ↔ 冥
+伊文（Even） → 师傅 → 匿影
+伊文（Even） ↔ 熟人 ↔ 蒂莫
+伊文（Even） ↔ 熟人 ↔ 蒂拉克
+伊文（Even） → 前前主人 → 刀灵
+伊文（Even） → 知己 → 艾尔娜
+蒂莫 → 认识 → 领袖
+蒂莫 → 继承人 → 蒂拉克
+蒂莫 ↔ 兄弟 ↔ 蒂拉克
+蒂莫 → 上司 → 林杏
+艾里克斯 ↔ 好友 ↔ 克里乌斯
+艾里克斯 ↔ 恋人 ↔ 史蒂夫
+艾里克斯 ↔ 好友 ↔ 瓦尔夏
+艾里克斯 ↔ 书友 ↔ 林杏
+瓦尔夏 → 铸造 → 刀灵
+蒂拉克 → 继承人 → 克里乌斯
+克里乌斯 ↔ 好友 ↔ 空时
+真理 → 师父 → 克里乌斯
+哲思 → 晚辈 → 真理
+永生 ↔ ？ ↔ 真理
+永生 → 威胁 → 哲思
+永生 → 杀 → 草原
+永生 → 杀 → 空时
+阿忒娜 ↔ 好友 ↔ 天空
+诛寒 → 杀 → 阿忒娜
+剧作家 → 杀 → 天空
+诛寒 → 手下 → 永生
+剧作家 → 手下 → 永生
+艾莉亚 → 养母 → 空时
+艾莉亚 → 臣民 → 永生
+空时 → 臣民 → 永生
+八使者 → 信徒 → 永生
+大主教 → 信徒 → 永生
+大主教 → 随从 → 八使者
+大主教 → 抚养 → 空视
+空视 → 后辈 → 空时
+死烛 → 死仆 → 大主教
+死烛 ↔ 熟人 ↔ 迷乱
+迷乱 → 信徒 → 大主教
+迷乱 → 监视 → 空视
+窥视 → 手下 → 领袖
+窥视 → 杀 → 莲
+莲 ↔ 夫妻 ↔ 西海杀
+爆破 → 手下 → 领袖
+爆破 → 杀 → 焚
+博学／Era → 手下 → 领袖
+博学／Era ↔ 合作 ↔ 药剂师
+博学／Era → 利用 → 爆破
+唤物 → 手下 → 领袖
+换物 → 杀 → 幻海
+换物 → 杀 → 蓝枫
+践踏 → 手下 → 领袖
+元素使 → 吸附 → 幻易`;
+
+const RELATIONSHIP_NAME_MAP = Object.freeze({
+  '幻易': { id: 'huanyi', label: '幻易' },
+  '元素使': { id: 'elementalist', label: '元素使' },
+  '天光': { id: 'tianguang', label: '天光' },
+  '凌至': { id: 'lingzhi', label: '凌至' },
+  '正闲': { id: 'zhengxian', label: '正闲' },
+  '初雨': { id: 'chuyu', label: '初雨' },
+  '蓝枫': { id: 'lanfeng', label: '蓝枫' },
+  '幻海': { id: 'huanhai', label: '幻海' },
+  '幻诚': { id: 'huancheng', label: '幻诚' },
+  '天空': { id: 'huideerge', label: '慧德尔格/天空神领' },
+  '言洛和': { id: 'yanluohe', label: '言洛和' },
+  '李兆': { id: 'lizhao', label: '李兆' },
+  '黄沙': { id: 'atena', label: '阿忒娜/黄沙神领' },
+  '孔青冥': { id: 'kongqingming', label: '孔青冥' },
+  '姜曦': { id: 'jiangxi', label: '姜曦' },
+  '柒月': { id: 'qiyue', label: '柒月' },
+  '凌霜': { id: 'lingshuang', label: '凌霜' },
+  '白辉': { id: 'baihui', label: '白辉' },
+  '凌聆': { id: 'lingling', label: '凌聆' },
+  '凌青石': { id: 'lingqingshi', label: '凌青石' },
+  '奎拉斯尔': { id: 'kuilasier', label: '奎拉斯尔' },
+  '瑰宁': { id: 'guining', label: '瑰宁' },
+  '海兹魁': { id: 'haizikui', label: '海兹魁' },
+  '艾莉满': { id: 'ailinuo', label: '艾莉诺' },
+  '柒尹': { id: 'qiyin', label: '柒尹' },
+  '正月': { id: 'zhengyue', label: '正月' },
+  '阿波德': { id: 'abode', label: '阿波德' },
+  '西海沙': { id: 'xihaisha', label: '西海沙' },
+  '窥视': { id: 'peep', label: '窥视' },
+  '迷乱': { id: 'miluan', label: '迷乱' },
+  '焚': { id: 'fen', label: '焚' },
+  '冥': { id: 'ming', label: '冥' },
+  '蒂莫': { id: 'third-principal', label: '蒂莫' },
+  '领袖': { id: 'leader', label: '领袖' },
+  '栖南': { id: 'qinan', label: '栖南' },
+  '艾尔娜': { id: 'aierna', label: '艾尔娜' },
+  '伊文（Even）': { id: 'even', label: '伊文（Even）' },
+  '匿影': { id: 'niying', label: '匿影' },
+  '蒂拉克': { id: 'dilake', label: '蒂拉克' },
+  '刀灵': { id: 'blade-spirit', label: '刀灵' },
+  '林杏': { id: 'linxing', label: '林杏' },
+  '艾里克斯': { id: 'alex', label: '艾里克斯' },
+  '克里乌斯': { id: 'keliwusi', label: '克里乌斯' },
+  '史蒂夫': { id: 'shidifu', label: '史蒂夫' },
+  '瓦尔夏': { id: 'waerxia', label: '瓦尔夏' },
+  '真理': { id: 'truth-god', label: '真理神领' },
+  '哲思': { id: 'setisi', label: '哲思神领' },
+  '永生': { id: 'eternal-god', label: '永生神领' },
+  '草原': { id: 'huoladekesi', label: '霍拉德克斯/草原神领' },
+  '空时': { id: 'kongshi-ancient', label: '空时' },
+  '阿忒娜': { id: 'atena', label: '阿忒娜/黄沙神领' },
+  '诛寒': { id: 'zhuhan', label: '诛寒/逆蔑神领' },
+  '剧作家': { id: 'playwright', label: '剧作家' },
+  '艾莉亚': { id: 'ailiya', label: '艾莉亚' },
+  '使者': { id: 'envoys', label: '使者' },
+  '八使者': { id: 'envoys', label: '使者' },
+  '大主教': { id: 'archbishop', label: '大主教' },
+  '空视': { id: 'kongshi', label: '空视' },
+  '死烛': { id: 'dead-candle', label: '死烛' },
+  '莲': { id: 'lian', label: '莲' },
+  '西海杀': { id: 'xihaisha', label: '西海沙' },
+  '爆破': { id: 'blast', label: '爆破' },
+  '博学／Era': { id: 'scholar', label: '博学/Era' },
+  '药剂师': { id: 'pharmacist', label: '药剂师' },
+  '唤物': { id: 'summoner', label: '唤物' },
+  '换物': { id: 'summoner', label: '唤物' },
+  '践踏': { id: 'trample', label: '践踏' },
+});
+
+const RELATIONSHIP_NODE_LABELS = Object.freeze(Object.values(RELATIONSHIP_NAME_MAP).reduce((labels, entity) => {
+  labels[entity.id] = entity.label;
+  return labels;
+}, {}));
+
+function parseRelationshipSource(source, nameMap) {
+  return source.split('\n').map((line) => line.trim()).filter(Boolean).map((line, index) => {
+    const match = line.match(/^(.+?)\s*(↔|→)\s*(.+?)\s*(↔|→)\s*(.+?)$/);
+    if (!match || match[2] !== match[4]) {
+      throw new Error(`人物关系第 ${index + 1} 行格式无效`);
+    }
+    const sourceEntity = nameMap[match[1].trim()];
+    const targetEntity = nameMap[match[5].trim()];
+    if (!sourceEntity || !targetEntity) {
+      throw new Error(`人物关系第 ${index + 1} 行存在未知人物`);
+    }
+    const direction = match[2] === '↔' ? 'mutual' : 'directed';
+    const relation = match[3].trim();
+    return {
+      source: sourceEntity.id,
+      target: targetEntity.id,
+      direction,
+      relation,
+      displayLabel: `${sourceEntity.label} ${match[2]} ${relation} ${match[4]} ${targetEntity.label}`,
+      evidence: { type: 'relationship-file', file: '人物关系.txt', line: index + 1 },
+    };
+  });
+}
+
 const CHARACTER_ARCHIVE = {
   "source": "角色档案.docx",
   "sourceSha256": "e7f2a8e9e1f6f48ff28ae9bf12e16d03c80a023a06353e355fb986e5d380c44f",
@@ -75,6 +282,12 @@ const CHARACTER_ARCHIVE = {
       "sourceIndexes": [
         502
       ]
+    },
+    {
+      "id": "pending",
+      "name": "资料待补",
+      "code": "CAST-10",
+      "sourceIndexes": []
     }
   ],
   "characters": [
@@ -3709,401 +3922,119 @@ const CHARACTER_ARCHIVE = {
         }
       ],
       "relations": []
-    }
-  ],
-  "relationshipNodes": [
-    {
-      "id": "era",
-      "name": "Era",
-      "category": "fallen",
-      "profileId": "scholar"
-    }
-  ],
-  "relationshipEdges": [
-    {
-      "source": "scholar",
-      "target": "era",
-      "displayLabel": "同一身体｜主人格／副人格",
-      "relationType": "identity",
-      "evidence": {
-        "type": "paragraphs",
-        "indexes": [
-          190,
-          195,
-          196,
-          197,
-          198
-        ]
-      }
     },
     {
-      "source": "leader",
-      "target": "era",
-      "displayLabel": "领袖 — Era｜陨落者成员",
-      "relationType": "affiliation",
-      "evidence": {
-        "type": "embedded-relation-diagram",
-        "asset": "word/media/image2.png"
-      }
+      "id": "huanhai",
+      "name": "幻海",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "lanfeng",
+      "name": "蓝枫",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "lizhao",
+      "name": "李兆",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "lingshuang",
+      "name": "凌霜",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "baihui",
+      "name": "白辉",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "zhengyue",
+      "name": "正月",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "abode",
+      "name": "阿波德",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "xihaisha",
+      "name": "西海沙",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "dilake",
+      "name": "蒂拉克",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "shidifu",
+      "name": "史蒂夫",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "ailiya",
+      "name": "艾莉亚",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
+    },
+    {
+      "id": "lian",
+      "name": "莲",
+      "category": "pending",
+      "sourceRange": null,
+      "placeholder": true,
+      "paragraphs": [{ "index": null, "text": "档案资料待补充" }],
+      "relations": []
     }
   ],
-  "appendices": [
-    {
-      "id": "combat-ranking",
-      "name": "第一季战力排行",
-      "titleIndex": 594,
-      "paragraphs": [
-        {
-          "index": 595,
-          "text": "（按正片时期最巅峰战力排序）"
-        },
-        {
-          "index": 596,
-          "text": "主角团"
-        },
-        {
-          "index": 597,
-          "text": "1.焚"
-        },
-        {
-          "index": 598,
-          "text": "（单凭肉身排行第三  加上能力的话排行第一）"
-        },
-        {
-          "index": 599,
-          "text": "2.空视"
-        },
-        {
-          "index": 600,
-          "text": "（扛得住她的攻击的打不过她，打得过她的扛不住她的攻击）"
-        },
-        {
-          "index": 601,
-          "text": "3.冥"
-        },
-        {
-          "index": 602,
-          "text": "（没有异能，但强化自身的躯体足够应付绝大部分人了）"
-        },
-        {
-          "index": 603,
-          "text": "4.幻易"
-        },
-        {
-          "index": 604,
-          "text": "（限制是这样用的 指疯狂给自己叠buff）"
-        },
-        {
-          "index": 605,
-          "text": "校医：哦哈呦小逼崽子你怎么又死回来了*核善"
-        },
-        {
-          "index": 606,
-          "text": "5.天光"
-        },
-        {
-          "index": 607,
-          "text": "（异能方面的话弱于凌至  但是正片里天光的高光时刻多一些）"
-        },
-        {
-          "index": 608,
-          "text": "6.凌至"
-        },
-        {
-          "index": 609,
-          "text": "（能力发动限制大，但是攻击能力强）"
-        },
-        {
-          "index": 610,
-          "text": "7.柒月、初雨 【奶妈和辅助】"
-        },
-        {
-          "index": 611,
-          "text": "（这两位基本上没有战斗戏份，而且异能不强）"
-        },
-        {
-          "index": 612,
-          "text": "陨落者"
-        },
-        {
-          "index": 613,
-          "text": "1.“领袖”"
-        },
-        {
-          "index": 614,
-          "text": "（战争以来的最强，由此而生的孤独，将要教会领袖【爱】的是...）"
-        },
-        {
-          "index": 615,
-          "text": "2.践踏"
-        },
-        {
-          "index": 616,
-          "text": "（就算能力再弱也能排到第二的角色）"
-        },
-        {
-          "index": 617,
-          "text": "3.唤物"
-        },
-        {
-          "index": 618,
-          "text": "（如果读过书的话那她甚至能手搓原子弹）"
-        },
-        {
-          "index": 619,
-          "text": "4.窥视"
-        },
-        {
-          "index": 620,
-          "text": "（异能强悍，但上限也只有那样了）"
-        },
-        {
-          "index": 621,
-          "text": "5.爆破"
-        },
-        {
-          "index": 622,
-          "text": "（无法控制异能或是无法抵御异能的人都会被他瞬秒，毕竟没有人说过异能不能在其他人体内释放）"
-        },
-        {
-          "index": 623,
-          "text": "6.博学"
-        },
-        {
-          "index": 624,
-          "text": "（战斗能力但凡高一些实力都直升前三了）"
-        },
-        {
-          "index": 625,
-          "text": "教会"
-        },
-        {
-          "index": 626,
-          "text": "1.“真理”"
-        },
-        {
-          "index": 627,
-          "text": "（单凭祂是神领就足够排到第一了）"
-        },
-        {
-          "index": 628,
-          "text": "2.大主教"
-        },
-        {
-          "index": 629,
-          "text": "（如果不会吃人的话实力就该降低了）"
-        },
-        {
-          "index": 630,
-          "text": "3.迷乱"
-        },
-        {
-          "index": 631,
-          "text": "（你永远理解不了她的脑回路，理解了也跟不上她的速度，跟上了的话就看谁更不要命吧）"
-        },
-        {
-          "index": 632,
-          "text": "4.死烛"
-        },
-        {
-          "index": 634,
-          "text": "整体战力排行"
-        },
-        {
-          "index": 635,
-          "text": "1.“真理”"
-        },
-        {
-          "index": 636,
-          "text": "（有挂，速ban）"
-        },
-        {
-          "index": 638,
-          "text": "2.“领袖”"
-        },
-        {
-          "index": 639,
-          "text": "（外挂开不全）"
-        },
-        {
-          "index": 640,
-          "text": "对战戏份：唤物//幻易//最终决战"
-        },
-        {
-          "index": 641,
-          "text": "结果"
-        },
-        {
-          "index": 642,
-          "text": "1.唤物尝试刺杀（实质是以分身吸引注意力，跑去找空视单挑） 领袖毫发无损  分身被秒杀"
-        },
-        {
-          "index": 643,
-          "text": "2.初次见面极度压制幻易，后期越来越吃力"
-        },
-        {
-          "index": 644,
-          "text": "3.面具被幻易斩断  轻微受伤 被逼出过载状态"
-        },
-        {
-          "index": 646,
-          "text": "2.5."
-        },
-        {
-          "index": 647,
-          "text": "匿影"
-        },
-        {
-          "index": 648,
-          "text": "虽然她没异能，但装备克异者，而且实力确实强。就是，死的真的太早了"
-        },
-        {
-          "index": 650,
-          "text": "3.焚"
-        },
-        {
-          "index": 651,
-          "text": "（天生克制领袖这类人物  但没能存活到那时候）"
-        },
-        {
-          "index": 652,
-          "text": "对战戏份：1.爆破  窥视//2.幻易，天光，冥"
-        },
-        {
-          "index": 653,
-          "text": "结果："
-        },
-        {
-          "index": 654,
-          "text": "1.重伤窥视  击杀爆破"
-        },
-        {
-          "index": 655,
-          "text": "2.幻易，天光重伤，冥受伤不重  被冥反制  被幻易击杀"
-        },
-        {
-          "index": 657,
-          "text": "4.践踏"
-        },
-        {
-          "index": 658,
-          "text": "（纯粹的强大）"
-        },
-        {
-          "index": 660,
-          "text": "5.大主教"
-        },
-        {
-          "index": 661,
-          "text": "对战戏份：最终决战"
-        },
-        {
-          "index": 662,
-          "text": "结果：压制了空视  遇见了和幻易交手的领袖时双方都进入了过载状态（但大主教没有对他们发动攻击，而是静观其变）  召唤了神领  死亡  被神领当作召唤物召唤出了巨兽"
-        },
-        {
-          "index": 664,
-          "text": "6.唤物"
-        },
-        {
-          "index": 665,
-          "text": "（战斗，爽！）"
-        },
-        {
-          "index": 666,
-          "text": "对战戏份：空视"
-        },
-        {
-          "index": 667,
-          "text": "结果："
-        },
-        {
-          "index": 668,
-          "text": "胜负未分，战斗中一直压制空视，轻微受伤"
-        },
-        {
-          "index": 670,
-          "text": "7.空视"
-        },
-        {
-          "index": 671,
-          "text": "（教会为数不多的正常且实力强悍的人了）"
-        },
-        {
-          "index": 673,
-          "text": "8.冥"
-        },
-        {
-          "index": 674,
-          "text": "对战戏份：爆破窥视"
-        },
-        {
-          "index": 675,
-          "text": "在焚来到战场前负责牵制窥视  重伤窥视"
-        },
-        {
-          "index": 677,
-          "text": "9.迷乱"
-        },
-        {
-          "index": 678,
-          "text": "（这姐们拼命能和唤物五五开的，而且你猜空视的打架谁教的）"
-        },
-        {
-          "index": 680,
-          "text": "10.幻易"
-        },
-        {
-          "index": 681,
-          "text": "（这位更是参团率百分百）"
-        },
-        {
-          "index": 683,
-          "text": "11.天光"
-        },
-        {
-          "index": 684,
-          "text": "（怎么次次打架都有你们俩）"
-        },
-        {
-          "index": 686,
-          "text": "12.凌至"
-        },
-        {
-          "index": 687,
-          "text": "（住手你们不要再打了啦！住手！*出手即是元素雨）"
-        },
-        {
-          "index": 689,
-          "text": "13.死烛"
-        },
-        {
-          "index": 690,
-          "text": "（比比划划很急的样子）"
-        },
-        {
-          "index": 692,
-          "text": "14.窥视"
-        },
-        {
-          "index": 694,
-          "text": "15.爆破"
-        },
-        {
-          "index": 696,
-          "text": "16.博学"
-        },
-        {
-          "index": 698,
-          "text": "17.柒月、初雨"
-        },
-        {
-          "index": 699,
-          "text": "（孩子们她们不是中式奶妈和辅助！）"
-        }
-      ]
-    }
-  ]
+  "relationshipNodes": [],
+  "relationshipNodeLabels": RELATIONSHIP_NODE_LABELS,
+  "relationshipEdges": parseRelationshipSource(RELATIONSHIP_SOURCE, RELATIONSHIP_NAME_MAP)
 };
 
 if (typeof module !== 'undefined' && module.exports) {
